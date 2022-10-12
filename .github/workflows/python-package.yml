@@ -27,13 +27,7 @@ jobs:
       id: test
       run: |
         cd tz_2
-        pytest tester.py -v --report-log=rez.json
-    - name: Upload math result for job 1
-      uses: actions/upload-artifact@v3
-      with:
-          name: rez
-          path: rez.json
-    - uses: actions/checkout@master
+        pytest tester.py -q --report-log=rez.json
   job_2:
     name: Sender
     needs: job_1

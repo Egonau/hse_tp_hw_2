@@ -28,14 +28,16 @@ jobs:
         python -m pip install matplotlib
         python -m pip install datetime
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-    - name: Test with pytest
+    - name: Test
+      id: test
       run: |
         cd tz_2
-        pytest tester.py -v
+        str: pytest tester.py -v
     - uses: actions/checkout@master
     - name: send message
       uses: appleboy/telegram-action@master
       with:
         to: ${{ secrets.TELEGRAM_ID }}
         token: ${{ secrets.TELEGRAM_KEY }}
-        message: hello
+        message: Python ${{ matrix.python-version }} ${{join(steps.test.outputs.*, '\n')}}
+        

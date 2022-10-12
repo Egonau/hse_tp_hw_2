@@ -32,17 +32,12 @@ jobs:
       id: test
       run: |
         cd tz_2
-        pytest tester.py --doctest-modules --junitxml=test-results.xml
+        pytest tester.py > rezults.txt
     - uses: actions/checkout@master
     - name: send message
       uses: appleboy/telegram-action@master
       with:
         to: ${{ secrets.TELEGRAM_ID }}
         token: ${{ secrets.TELEGRAM_KEY }}
-        document: test-results.xml
-    - name: Upload pytest test results
-      uses: actions/upload-artifact@v3
-      with:
-        name: pytest-results
-        path: test-results.xml
+        message: rezults.txt
         

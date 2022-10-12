@@ -32,7 +32,7 @@ jobs:
       id: test
       run: |
         cd tz_2
-        pytest tester.py -v --doctest-modules --junitxml=junit/test-results-${{ matrix.python-version }}.xml
+        pytest tester.py --doctest-modules --junitxml=junit/test-results-${{ matrix.python-version }}.xml
     - uses: actions/checkout@master
     - name: send message
       uses: appleboy/telegram-action@master
@@ -40,4 +40,9 @@ jobs:
         to: ${{ secrets.TELEGRAM_ID }}
         token: ${{ secrets.TELEGRAM_KEY }}
         document: junit/test-results-${{ matrix.python-version }}.xml
+    - name: Upload pytest test results
+      uses: actions/upload-artifact@v3
+      with:
+        name: pytest-results-${{ matrix.python-version }}
+        path: junit/test-results-${{ matrix.python-version }}.xml
         

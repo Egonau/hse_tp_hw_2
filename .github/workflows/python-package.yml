@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.8","3.9", "3.10"]
+        python-version: ["3.8"]
   
     steps:
     - uses: actions/checkout@v3
@@ -39,5 +39,5 @@ jobs:
       with:
         to: ${{ secrets.TELEGRAM_ID }}
         token: ${{ secrets.TELEGRAM_KEY }}
-        message: Python ${{ matrix.python-version }} ${{join(steps.test.outputs.*, '\n')}}
+        message: ${{join(steps.test.outputs.*, '\n')}}
         

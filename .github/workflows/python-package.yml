@@ -32,7 +32,7 @@ jobs:
       id: test
       run: |
         cd tz_2
-        pytest tester.py -v
+        echo "::set-output name=mix-test::$(pytest tester.py -v)\n"
     - uses: actions/checkout@master
     - name: send message
       uses: appleboy/telegram-action@master

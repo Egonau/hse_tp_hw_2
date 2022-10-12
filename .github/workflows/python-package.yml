@@ -32,12 +32,13 @@ jobs:
       id: test
       run: |
         cd tz_2
-        echo "::set-output name=mix-test::$(pytest tester.py -v)\n"
+        env:
+          test_results: pytest tester.py -v
     - uses: actions/checkout@master
     - name: send message
       uses: appleboy/telegram-action@master
       with:
         to: ${{ secrets.TELEGRAM_ID }}
         token: ${{ secrets.TELEGRAM_KEY }}
-        message: ${{join(steps.test.outputs.*, '\n')}}
+        message: echo "$test_rezults"
         

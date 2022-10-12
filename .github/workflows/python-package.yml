@@ -27,7 +27,12 @@ jobs:
       id: test
       run: |
         cd tz_2
-        pytest tester.py -q --report-log=rez.json
+        pytest tester.py -q --report-log=log.json
+    - name: Upload math result for job 2
+      uses: actions/upload-artifact@v3
+      with:
+        name: log
+        path: log.json
   job_2:
     name: Sender
     needs: job_1
@@ -36,11 +41,11 @@ jobs:
     - name: Download math result for job 1
       uses: actions/download-artifact@v3
       with:
-          name: rez
+          name: log
     - name: send telegram 
       uses: appleboy/telegram-action@master
       with:
           to: ${{ secrets.TELEGRAM_ID }}
           token: ${{ secrets.TELEGRAM_KEY }}
-          document: rez.json
+          document: log.json
   

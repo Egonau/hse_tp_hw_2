@@ -32,7 +32,7 @@ jobs:
       id: test
       run: |
         cd tz_2
-        str: pytest tester.py -v
+        pytest tester.py -v
     - uses: actions/checkout@master
     - name: send message
       uses: appleboy/telegram-action@master

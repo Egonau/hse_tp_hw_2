@@ -32,8 +32,7 @@ jobs:
       id: test
       run: |
         cd tz_2
-        env:
-          test_results: pytest tester.py -v --doctest-modules --junitxml=junit/test-results-${{ matrix.python-version }}.xml
+        pytest tester.py -v --doctest-modules --junitxml=junit/test-results-${{ matrix.python-version }}.xml
     - uses: actions/checkout@master
     - name: send message
       uses: appleboy/telegram-action@master

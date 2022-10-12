@@ -51,7 +51,7 @@ def test_sum_time():
     for i in range(1, 100):
         tick = datetime.now()
         a = main.file_reader("tests/test_{}".format(i))
-        assert main._max(a)
+        assert main._sum(a)
         arr_time_got.append((datetime.now() - tick).microseconds / 100000)
         arr_size_got.append(len(a))
         plt.plot(arr_size_got, arr_time_got)

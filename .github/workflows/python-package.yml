@@ -27,7 +27,7 @@ jobs:
       id: test
       run: |
         cd tz_2
-        pytest tester.py -q --report-log=log.json
+        pytest tester.py -o log_cli=true --log-cli-level=DEBUG --report-log=log.json
     - name: Upload math result for job 2
       uses: actions/upload-artifact@v3
       with:
